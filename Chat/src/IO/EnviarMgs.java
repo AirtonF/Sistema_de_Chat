@@ -1,27 +1,27 @@
 package IO;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class EnviarMgs extends Thread{
-	private BufferedReader entrada;
+public class EnviarMgs extends Thread {
+	private PrintStream printStream;
+	private Scanner scanner;
+	private String msg;
 	
-	public EnviarMgs(InputStreamReader input) {
-		entrada = new BufferedReader(input);
+	public EnviarMgs(OutputStream output) {
+		printStream = new PrintStream(output);
 	}
-
-	@Override
-	public void run() {
-	while(true)
-		try {
-			System.out.println(entrada.readLine());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+ 
+ @Override
+public void run() {
+	 scanner = new Scanner(System.in);
+	 
+	 while (true){
+		 msg = scanner.nextLine();	
+		 printStream.println(msg);
+	 }
+ }
+ 
 }

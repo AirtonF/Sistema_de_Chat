@@ -1,23 +1,25 @@
 package IO;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import java.util.List;
 
-public class ReceberMgs extends Thread{
+public class ReceberMgsServidor extends Thread{
+
+
 	private BufferedReader entrada;
 	private  String msg ;
-	public ReceberMgs(InputStream input) {
+	public ReceberMgsServidor(InputStream input) {
 		entrada = new BufferedReader(new InputStreamReader(input));
 	}
 
 	@Override
 	public void run() {
-	while(true){
+	String[] refat;
+		while(true){
 	
 		try {
 			msg = entrada.readLine();
@@ -25,10 +27,13 @@ public class ReceberMgs extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(msg != null)
-			System.out.println(msg);
+			
+		refat = msg.split("-");		
 		
-	}
+		}
 	
 	}
+
+	
+	
 }

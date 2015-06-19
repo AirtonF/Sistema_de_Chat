@@ -8,20 +8,24 @@ import IO.EnviarMgs;
 import IO.ReceberMgs;
 
 
-public class cliente {
-private static Socket cliente;
-public static void main(String[] args) {
+public class Cliente extends Thread{
+	
+	public static Socket Conexaocliente ;
+	
+		
+
+	public static void main(String[] args) {
 	try {
 		
-		cliente = new Socket("127.0.0.1",4444);
+		Conexaocliente = new Socket("localhost",4444);
 		System.out.println("CLIENTE:conectado ao servidor");
 		
-		ReceberMgs rm = new ReceberMgs(cliente.getInputStream());
-		rm.run();
-		 
-		 EnviarMgs em = new EnviarMgs(cliente.getOutputStream());
-			em.run();
-			
+		new EnviarMgs(Conexaocliente.getOutputStream()).start();
+		new ReceberMgs(Conexaocliente.getInputStream()).start();
+		
+		// Realizando Login
+		
+		
 	} catch (UnknownHostException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -31,7 +35,15 @@ public static void main(String[] args) {
 	}
 	
 }
-	   
+	
+@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		super.run();
+	}
+
+
+
 }
 
 
